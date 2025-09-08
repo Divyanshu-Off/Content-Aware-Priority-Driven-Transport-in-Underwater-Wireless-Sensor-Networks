@@ -1,0 +1,2 @@
+# Content-Aware-Priority-Driven-Transport-in-Underwater-Wireless-Sensor-Networks
+Underwater Wireless Sensor Networks (UWSNs) face severe constraints. Many sensed data pieces are not equally important. The goal of this project is to design, simulate, and evaluate a Content-Aware, Priority-Driven Transport system for UWSNs that classifies packet content (or metadata) into priority levels and preserving network lifetime.
