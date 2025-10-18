@@ -9,14 +9,11 @@ Outputs:
 
 import os
 import math
-import uuid
-import csv
 import argparse
 import random
 from collections import deque
 import numpy as np
 import pandas as pd
-from datetime import datetime
 
 # ------------------------
 # Parameters (tune here)
