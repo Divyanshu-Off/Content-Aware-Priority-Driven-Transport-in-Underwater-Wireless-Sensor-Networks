@@ -8,6 +8,10 @@ Our approach is **content-aware**: packets are prioritized based on their **type
 
 ---
 
+## 📋 Project Documentation
+
+- **[Phase 1 Design Specification](./docs/PHASE_1_DESIGN.md)** - Complete design doc with network model, traffic classes, packet schema, priority mapping rules, energy model, and KPIs. **Start here!**
+
 ## 🎯 Objectives
 - Implement a **content-aware transport protocol** for UWSNs.  
 - Prioritize packets based on **urgency, reliability requirements, and data sensitivity**.  
