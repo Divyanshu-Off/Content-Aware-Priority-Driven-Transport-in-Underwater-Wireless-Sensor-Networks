@@ -38,3 +38,10 @@ Our approach is **content-aware**: packets are prioritized based on their **type
 - **Visualization**: Matplotlib / Seaborn / Excel reports  
 
 ---
+
+## 📈 Project Status
+*Last updated: January 10, 2026*
+
+Active development in progress. Current focus on implementing priority-based packet scheduling algorithms and energy-efficient routing mechanisms for underwater acoustic communication.
+
+---
