@@ -68,3 +68,49 @@ class NetworkSimulator:
             'network_alive': self.node_manager.check_network_alive(),
             'active_nodes': len(self.node_manager.get_active_nodes())
         }
+
+    
+    def run_simulation(self, duration: Optional[float] = None):
+        """Run the simulation for specified duration."""
+        if not self.is_initialized:
+            raise RuntimeError("Simulation not initialized. Call initialize() first.")
+        
+        sim_duration = duration or self.config['simulation']['duration']
+        time_step = self.config['simulation']['time_step']
+        
+        print(f"\nStarting simulation for {sim_duration} seconds...")
+        
+        while self.current_time < sim_duration:
+            # Update environment
+            self.environment.update_environment(time_step)
+            
+            # Check if network is still alive
+            if not self.node_manager.check_network_alive():
+                print(f"Network died at time {self.current_time}")
+                break
+            
+            # Advance time
+            self.current_time += time_step
+            
+            # Print progress every 100 time units
+            if int(self.current_time) % 100 == 0:
+                stats = self.node_manager.get_network_stats()
+                print(f"Time: {self.current_time:.1f}s - Active nodes: {stats['active_nodes']}")
+        
+        print(f"\nSimulation completed at time {self.current_time}")
+        self._print_final_statistics()
+    
+    def _print_final_statistics(self):
+        """Print final simulation statistics."""
+        stats = self.node_manager.get_network_stats()
+        
+        print("\n" + "="*50)
+        print("SIMULATION STATISTICS")
+        print("="*50)
+        print(f"Total simulation time: {self.current_time:.2f} seconds")
+        print(f"Total nodes: {stats['total_nodes']}")
+        print(f"Active nodes: {stats['active_nodes']}")
+        print(f"Dead nodes: {stats['dead_nodes']}")
+        print(f"Average energy: {stats['avg_energy']:.2f}")
+        print(f"Network lifetime: {stats['network_lifetime']:.2%}")
+        print("="*50)
