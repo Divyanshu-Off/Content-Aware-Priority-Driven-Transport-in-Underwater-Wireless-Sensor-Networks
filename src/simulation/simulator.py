@@ -114,3 +114,50 @@ class NetworkSimulator:
         print(f"Average energy: {stats['avg_energy']:.2f}")
         print(f"Network lifetime: {stats['network_lifetime']:.2%}")
         print("="*50)
+
+    
+    def step(self, time_step: float = 1.0):
+        """Execute one simulation step."""
+        if not self.is_initialized:
+            raise RuntimeError("Simulation not initialized")
+        
+        self.environment.update_environment(time_step)
+        self.current_time += time_step
+        
+        return self.get_simulation_status()
+    
+    def reset(self):
+        """Reset the simulation to initial state."""
+        self.current_time = 0.0
+        self.is_initialized = False
+        
+        # Reinitialize environment and nodes
+        self.environment = UnderwaterEnvironment(
+            width=self.config['environment']['width'],
+            height=self.config['environment']['height'],
+            depth=self.config['environment']['depth'],
+            temperature=self.config['environment']['temperature']
+        )
+        
+        self.node_manager = NodeManager(
+            num_nodes=self.config['network']['num_nodes'],
+            environment=self.environment
+        )
+        
+        print("Simulation reset to initial state")
+    
+    def save_configuration(self, filepath: str):
+        """Save simulation configuration to file."""
+        import json
+        with open(filepath, 'w') as f:
+            json.dump(self.config, f, indent=4)
+        print(f"Configuration saved to {filepath}")
+    
+    @staticmethod
+    def load_configuration(filepath: str) -> Dict:
+        """Load simulation configuration from file."""
+        import json
+        with open(filepath, 'r') as f:
+            config = json.load(f)
+        print(f"Configuration loaded from {filepath}")
+        return config
